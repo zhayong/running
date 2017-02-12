@@ -14,3 +14,27 @@
 
 #endif /* Running_pre_pch */
 #import <RongIMKit/RongIMKit.h>
+
+#define SDColor(r, g, b, a) [UIColor colorWithRed:(r / 255.0) green:(g / 255.0) blue:(b / 255.0) alpha:a]
+
+#define Global_tintColor [UIColor colorWithRed:0 green:(190 / 255.0) blue:(12 / 255.0) alpha:1]
+
+#define Global_mainBackgroundColor SDColor(248, 248, 248, 1)
+
+#define TimeLineCellHighlightedColor [UIColor colorWithRed:92/255.0 green:140/255.0 blue:193/255.0 alpha:1.0]
+
+#define DAY @"day"
+
+#define NIGHT @"night"
+
+#define USERINFO_UPDATE_NOTIFACATION @"USERINFO_UPDATE_NOTIFACATION"
+
+#define LEVEL_1 @"普通级跑者"
+#define LEVEL_2 @"白银级跑者"
+#define LEVEL_3 @"黄金级跑者"
+#define LEVEL_4 @"白银级跑者"
+#define LEVEL_5 @"钻石级跑者"
+#define LEVEL_6 @"骨灰级跑者"
+
+#define LEVEL_COUNT 6
+

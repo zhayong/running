@@ -9,7 +9,7 @@
 #import "PointsMallCollectionViewController.h"
 #import "PointsMallCollectionViewCell.h"
 
-@interface PointsMallCollectionViewController ()
+@interface PointsMallCollectionViewController ()<PointsMallCollectionViewCellDelegete>
 
 @end
 
@@ -22,7 +22,6 @@ static NSString * const reuseIdentifier = @"pointsMallCell";
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
-    
     // 注册UICollectionView
     [self.collectionView registerNib:[UINib nibWithNibName:@"PointsMallCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
     
@@ -76,10 +75,26 @@ static NSString * const reuseIdentifier = @"pointsMallCell";
 //    [self.collectionView registerClass:[PointsMallCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     PointsMallCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
+    cell.PointsMallCollectionViewCellDelegete = self;
     // Configure the cell
     
     return cell;
+}
+
+#pragma mark -- PointsMallCollectionViewCellDelegete
+
+- (void)selectPointsMallCollectionViewCell:(PointsMallCollectionViewCell *)pointsMallCollectionViewCell
+{
+    UIAlertController *alerVc = [UIAlertController alertControllerWithTitle:nil message:@"兑换成功!" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alerVc addAction:ok];
+    
+    [self presentViewController:alerVc animated:YES completion:^{
+        
+    }];
 }
 
 #pragma mark <UICollectionViewDelegate>

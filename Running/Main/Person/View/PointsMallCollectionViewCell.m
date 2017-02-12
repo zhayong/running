@@ -10,4 +10,8 @@
 
 @implementation PointsMallCollectionViewCell
 
+- (IBAction)exchange:(UIButton *)sender {
+    [self.PointsMallCollectionViewCellDelegete selectPointsMallCollectionViewCell:self];
+}
+
 @end

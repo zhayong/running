@@ -7,12 +7,23 @@
 //
 
 #import "PersonTableViewController.h"
+#import "LoginViewController.h"
 
 @interface PersonTableViewController ()
 
 @end
 
 @implementation PersonTableViewController
+
+- (IBAction)logout:(UIBarButtonItem *)sender {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    LoginViewController *loginVc = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [self presentViewController:loginVc animated:YES completion:^{
+        
+    }];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

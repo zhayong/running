@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class PointsMallCollectionViewCell;
+
+@protocol PointsMallCollectionViewCellDelegete <NSObject>
+
+- (void)selectPointsMallCollectionViewCell:(PointsMallCollectionViewCell *)pointsMallCollectionViewCell;
+
+@end
+
+
 @interface PointsMallCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic, strong) id<PointsMallCollectionViewCellDelegete>PointsMallCollectionViewCellDelegete;
 @end

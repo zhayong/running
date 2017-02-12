@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SDBaseTableViewController.h"
 
-@interface ApertureViewController : UIViewController
+@interface ApertureViewController : SDBaseTableViewController
 
 @end

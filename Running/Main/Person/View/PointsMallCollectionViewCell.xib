@@ -37,6 +37,9 @@
                             <constraint firstAttribute="height" constant="30" id="Ny2-6y-Mk8"/>
                         </constraints>
                         <state key="normal" title="兑换"/>
+                        <connections>
+                            <action selector="exchange:" destination="9Xg-Em-EBd" eventType="touchUpInside" id="Kut-YU-JZe"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
