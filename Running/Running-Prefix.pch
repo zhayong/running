@@ -29,6 +29,12 @@
 
 #define USERINFO_UPDATE_NOTIFACATION @"USERINFO_UPDATE_NOTIFACATION"
 
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+// 自定义将RGB转换成UIColor
+#define HJRGBA(r,g,b,a)  [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:a]
+
 #define LEVEL_1 @"普通级跑者"
 #define LEVEL_2 @"白银级跑者"
 #define LEVEL_3 @"黄金级跑者"

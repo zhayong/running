@@ -29,6 +29,7 @@
     self.isLogin = [self.defaults objectForKey:@"isLogin"];
     self.nickname = [self.defaults objectForKey:@"nickname"];
     self.declaration = [self.defaults objectForKey:@"declaration"];
+    self.profileImageName = [self.defaults objectForKey:@"profileImageName"];
     
     self.targetStepCout = [self.defaults objectForKey:@"targetStepCout"];
     self.point = [self.defaults objectForKey:@"point"];
@@ -62,7 +63,7 @@
 {
     NSInteger newPoint = [self.point integerValue] + 1;
     
-    self.point = [NSString stringWithFormat:@"%ld",newPoint];
+    self.point = [NSString stringWithFormat:@"%ld",(long)newPoint];
 }
 
 - (NSUserDefaults *)defaults {
@@ -70,6 +71,13 @@
         _defaults = [NSUserDefaults standardUserDefaults];
     }
     return _defaults;
+}
+
+- (NSString *)profileImageName{
+    if (!_profileImageName) {
+        _profileImageName = @"profile";
+    }
+    return _profileImageName;
 }
 
 - (NSString *)nickname {

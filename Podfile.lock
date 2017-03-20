@@ -1,15 +1,18 @@
 PODS:
+  - MJExtension (3.0.13)
   - RongCloudIM/IMKit (2.8.5):
     - RongCloudIM/IMLib
   - RongCloudIM/IMLib (2.8.5)
 
 DEPENDENCIES:
+  - MJExtension
   - RongCloudIM/IMKit (~> 2.8.4)
   - RongCloudIM/IMLib (~> 2.8.4)
 
 SPEC CHECKSUMS:
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
   RongCloudIM: c38f0afbcb417e735afafbb011ba53c9dd5a9cf2
 
-PODFILE CHECKSUM: 05e30bc6868340e3beefebdc648dc5499b0cd677
+PODFILE CHECKSUM: af5047a6e42bbd5000a881dbb9297a587c96946f
 
 COCOAPODS: 1.1.1

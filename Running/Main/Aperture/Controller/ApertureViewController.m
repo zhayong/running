@@ -19,6 +19,13 @@
 #import "UIView+SDAutoLayout.h"
 
 #import "LEETheme.h"
+#import <MJExtension/MJExtension.h>
+
+#import "PublishViewController.h"
+
+#import "ZYFileManager.h"
+
+#import "UserInfoModel.h"
 
 #define kTimeLineTableViewCellId @"SDTimeLineCell"
 
@@ -48,17 +55,17 @@ static CGFloat textFieldH = 40;
     
     //LEETheme 分为两种模式 , 独立设置模式 JSON设置模式 , 朋友圈demo展示的是独立设置模式的使用 , 微信聊天demo 展示的是JSON模式的使用
     
-    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"日间" style:UIBarButtonItemStyleDone target:self action:@selector(rightBarButtonItemAction:)];
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStyleDone target:self action:@selector(rightBarButtonItemAction:)];
     
-    rightBarButtonItem.lee_theme
-    .LeeAddCustomConfig(DAY , ^(UIBarButtonItem *item){
-        
-        item.title = @"夜间";
-        
-    }).LeeAddCustomConfig(NIGHT , ^(UIBarButtonItem *item){
-        
-        item.title = @"日间";
-    });
+//    rightBarButtonItem.lee_theme
+//    .LeeAddCustomConfig(DAY , ^(UIBarButtonItem *item){
+//        
+//        item.title = @"夜间";
+//        
+//    }).LeeAddCustomConfig(NIGHT , ^(UIBarButtonItem *item){
+//        
+//        item.title = @"日间";
+//    });
     
     //为self.view 添加背景颜色设置
     
@@ -72,7 +79,7 @@ static CGFloat textFieldH = 40;
     
     self.edgesForExtendedLayout = UIRectEdgeTop;
     
-    [self.dataArray addObjectsFromArray:[self creatModelsWithCount:10]];
+    [self.dataArray addObjectsFromArray:[self creatModelsWithCount:2]];
     
     __weak typeof(self) weakSelf = self;
     
@@ -82,7 +89,7 @@ static CGFloat textFieldH = 40;
     __weak typeof(_refreshFooter) weakRefreshFooter = _refreshFooter;
     [_refreshFooter addToScrollView:self.tableView refreshOpration:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.dataArray addObjectsFromArray:[weakSelf creatModelsWithCount:10]];
+            [weakSelf.dataArray addObjectsFromArray:[weakSelf creatModelsWithCount:2]];
             
             /**
              [weakSelf.tableView reloadDataWithExistedHeightCache]
@@ -125,7 +132,7 @@ static CGFloat textFieldH = 40;
         __weak typeof(self) weakSelf = self;
         [_refreshHeader setRefreshingBlock:^{
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                weakSelf.dataArray = [[weakSelf creatModelsWithCount:10] mutableCopy];
+                weakSelf.dataArray = (NSMutableArray *)[[[weakSelf creatModelsWithCount:2] reverseObjectEnumerator] allObjects];
                 [weakHeader endRefreshing];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [weakSelf.tableView reloadData];
@@ -194,18 +201,55 @@ static CGFloat textFieldH = 40;
 
 - (void)rightBarButtonItemAction:(UIBarButtonItem *)sender{
     
-    if ([[LEETheme currentThemeTag] isEqualToString:DAY]) {
-        
-        [LEETheme startTheme:NIGHT];
-        
-    } else {
-        [LEETheme startTheme:DAY];
-    }
+    PublishViewController *pubulish = [[PublishViewController alloc]init];
+    
+    [self.navigationController pushViewController:pubulish animated:YES];
+    
+//    if ([[LEETheme currentThemeTag] isEqualToString:DAY]) {
+//        
+//        [LEETheme startTheme:NIGHT];
+//        
+//    } else {
+//        [LEETheme startTheme:DAY];
+//    }
 }
 
 - (NSArray *)creatModelsWithCount:(NSInteger)count
 {
-    NSArray *iconImageNamesArray = @[@"icon0.jpg",
+    // 获取文档目录
+    NSString *docDir = [ZYFileManager getDocumentDirectory];
+    
+    //取得目标文件路径
+    NSString *plistPath = [docDir stringByAppendingPathComponent:@"apertureData.plist"];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    //如果目标文件不存在说明是App第一次运行,需要将相关可修改数据文件拷贝至目标路径.
+    if (![fm fileExistsAtPath:plistPath]) {
+        NSError *error = nil;
+        //取得源文件路径
+        NSString *srcPath = [[NSBundle mainBundle] pathForResource:@"apertureData" ofType:@"plist"];
+        if (![fm copyItemAtPath:srcPath toPath:plistPath error:&error]) {
+            NSLog(@"ERR:copy file failed:%@",error);
+        }
+    }else{
+//        // 如果存在，移除旧的文件
+//        [fm removeItemAtPath:plistPath error:nil];
+//        NSError *error = nil;
+//        //取得源文件路径
+//        NSString *srcPath = [[NSBundle mainBundle] pathForResource:@"apertureData" ofType:@"plist"];
+//        if (![fm copyItemAtPath:srcPath toPath:plistPath error:&error]) {
+//            NSLog(@"ERR:copy file failed:%@",error);
+//        }
+    }
+    
+    NSMutableArray *apertureData = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
+    
+//    NSMutableArray *dataArr = [NSMutableArray array];
+    
+//    for(NSInteger i = 0;i < count;i++){
+//        [dataArr addObject:apertureData[0]];
+//    }
+    
+   /* NSArray *iconImageNamesArray = @[@"icon0.jpg",
                                      @"icon1.jpg",
                                      @"icon2.jpg",
                                      @"icon3.jpg",
@@ -308,6 +352,16 @@ static CGFloat textFieldH = 40;
         
         [resArr addObject:model];
     }
+    return [resArr copy];*/
+    
+    [SDTimeLineCellModel mj_setupObjectClassInArray:^NSDictionary *{
+        return @{
+                 @"likeItemsArray" : @"SDTimeLineCellLikeItemModel",
+                 @"commentItemsArray" : @"SDTimeLineCellCommentItemModel",
+                 @"picNamesArray" : @"NSArray"
+                };
+    }];
+    NSMutableArray *resArr = [SDTimeLineCellModel mj_objectArrayWithKeyValuesArray:apertureData];
     return [resArr copy];
 }
 
@@ -401,7 +455,7 @@ static CGFloat textFieldH = 40;
     
     if (!model.isLiked) {
         SDTimeLineCellLikeItemModel *likeModel = [SDTimeLineCellLikeItemModel new];
-        likeModel.userName = @"GSD_iOS";
+        likeModel.userName = [UserInfoModel shareUserInfo].nickname;
         likeModel.userId = @"gsdios";
         [temp addObject:likeModel];
         model.liked = YES;
@@ -459,17 +513,17 @@ static CGFloat textFieldH = 40;
         SDTimeLineCellCommentItemModel *commentItemModel = [SDTimeLineCellCommentItemModel new];
         
         if (self.isReplayingComment) {
-            commentItemModel.firstUserName = @"GSD_iOS";
-            commentItemModel.firstUserId = @"GSD_iOS";
+            commentItemModel.firstUserName = [UserInfoModel shareUserInfo].nickname;
+            commentItemModel.firstUserId = [UserInfoModel shareUserInfo].nickname;
             commentItemModel.secondUserName = self.commentToUser;
             commentItemModel.secondUserId = self.commentToUser;
             commentItemModel.commentString = textField.text;
             
             self.isReplayingComment = NO;
         } else {
-            commentItemModel.firstUserName = @"GSD_iOS";
+            commentItemModel.firstUserName = [UserInfoModel shareUserInfo].nickname;
             commentItemModel.commentString = textField.text;
-            commentItemModel.firstUserId = @"GSD_iOS";
+            commentItemModel.firstUserId = [UserInfoModel shareUserInfo].nickname;
         }
         [temp addObject:commentItemModel];
         model.commentItemsArray = [temp copy];

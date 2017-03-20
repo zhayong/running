@@ -30,6 +30,8 @@
 
 #import "UIView+SDAutoLayout.h"
 
+#import "UserInfoModel.h"
+
 @implementation SDTimeLineTableHeaderView
 
 {
@@ -53,13 +55,13 @@
     [self addSubview:_backgroundImageView];
     
     _iconView = [UIImageView new];
-    _iconView.image = [UIImage imageNamed:@"picon.jpg"];
+    _iconView.image = [UIImage imageNamed:[UserInfoModel shareUserInfo].profileImageName];
     _iconView.layer.borderColor = [UIColor whiteColor].CGColor;
     _iconView.layer.borderWidth = 3;
     [self addSubview:_iconView];
     
     _nameLabel = [UILabel new];
-    _nameLabel.text = @"GSD_iOS";
+    _nameLabel.text = [UserInfoModel shareUserInfo].nickname;
     _nameLabel.textColor = [UIColor whiteColor];
     _nameLabel.textAlignment = NSTextAlignmentRight;
     _nameLabel.font = [UIFont boldSystemFontOfSize:15];

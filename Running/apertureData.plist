@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>shouldShowMoreButton</key>
+		<false/>
+		<key>isOpening</key>
+		<false/>
+		<key>iconName</key>
+		<string>icon0.jpg</string>
+		<key>name</key>
+		<string>GSD_iOS</string>
+		<key>msgContent</key>
+		<string>当你的 app 没有提供 3x 的 LaunchImage 时，系统默认进入兼容模式，https://github.com/gsdios/SDAutoLayout大屏幕一切按照 320 宽度渲染，屏幕宽度返回 320；然后等比例拉伸到大屏。这种情况下对界面不会产生任何影响，等于把小屏完全拉伸。</string>
+		<key>picNamesArray</key>
+		<array>
+			<string>pic0.jpg</string>
+		</array>
+		<key>liked</key>
+		<false/>
+		<key>likeItemsArray</key>
+		<array>
+			<dict>
+				<key>userName</key>
+				<string>userName</string>
+				<key>userId</key>
+				<string>1</string>
+			</dict>
+		</array>
+		<key>commentItemsArray</key>
+		<array>
+			<dict>
+				<key>commentString</key>
+				<string>社会主义好！👌👌👌👌</string>
+				<key>firstUserName</key>
+				<string>firstUserName</string>
+				<key>firstUserId</key>
+				<string>1</string>
+				<key>secondUserName</key>
+				<string>secondUserName</string>
+				<key>secondUserId</key>
+				<string>2</string>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>

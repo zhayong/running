@@ -205,6 +205,8 @@ NSString *const kSDTimeLineCellOperationButtonClickedNotification = @"SDTimeLine
 {
     _model = model;
     
+    NSLog(@"%@-----%@",model.likeItemsArray,model.commentItemsArray);
+    
     [_commentView setupWithLikeItemsArray:model.likeItemsArray commentItemsArray:model.commentItemsArray];
     
     _iconView.image = [UIImage imageNamed:model.iconName];
