@@ -21,6 +21,9 @@
 
 @property (nonatomic, copy) NSString *isLogin;
 
+// 兑换商品图片
+@property (nonatomic, strong) NSMutableArray *goods;
+
 + (UserInfoModel *)shareUserInfo;
 - (void)loadData;
 - (void)saveData;

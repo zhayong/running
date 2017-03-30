@@ -34,6 +34,7 @@
     self.targetStepCout = [self.defaults objectForKey:@"targetStepCout"];
     self.point = [self.defaults objectForKey:@"point"];
     self.level = [self.defaults objectForKey:@"level"];
+    self.goods = [self.defaults objectForKey:@"goods"];
 }
 
 - (void)saveData {
@@ -42,6 +43,7 @@
     [self.defaults setObject:self.targetStepCout forKey:@"targetStepCout"];
     [self.defaults setObject:self.point forKey:@"point"];
     [self.defaults setObject:self.level forKey:@"level"];
+    [self.defaults setObject:self.goods forKey:@"goods"];
     [self.defaults synchronize];
 }
 
@@ -120,6 +122,13 @@
         _isLogin = @"NO";
     }
     return _isLogin;
+}
+
+-(NSMutableArray *)goods{
+    if (!_goods) {
+        _goods = [NSMutableArray array];
+    }
+    return _goods;
 }
 
 @end

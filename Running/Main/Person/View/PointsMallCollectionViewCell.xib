@@ -56,6 +56,9 @@
                 <constraint firstItem="wUH-8L-8Cn" firstAttribute="bottom" secondItem="9Xg-Em-EBd" secondAttribute="bottomMargin" id="gNt-os-fOo"/>
             </constraints>
             <size key="customSize" width="112" height="174"/>
+            <connections>
+                <outlet property="goodsImage" destination="IPF-6T-o3p" id="DO8-cg-yv8"/>
+            </connections>
         </collectionViewCell>
     </objects>
     <resources>

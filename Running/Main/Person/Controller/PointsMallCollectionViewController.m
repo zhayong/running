@@ -8,8 +8,11 @@
 
 #import "PointsMallCollectionViewController.h"
 #import "PointsMallCollectionViewCell.h"
+#import "UserInfoModel.h"
 
 @interface PointsMallCollectionViewController ()<PointsMallCollectionViewCellDelegete>
+
+@property (nonatomic, strong) NSArray *images;
 
 @end
 
@@ -20,6 +23,8 @@ static NSString * const reuseIdentifier = @"pointsMallCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    _images = @[@"0",@"1",@"2",@"3"];
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     // 注册UICollectionView
@@ -60,13 +65,13 @@ static NSString * const reuseIdentifier = @"pointsMallCell";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 #warning Incomplete implementation, return the number of sections
-    return 100;
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of items
-    return 3;
+    return _images.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -75,6 +80,8 @@ static NSString * const reuseIdentifier = @"pointsMallCell";
 //    [self.collectionView registerClass:[PointsMallCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     PointsMallCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    cell.goodsImage.image = [UIImage imageNamed:_images[indexPath.row]];
+    cell.imageName = _images[indexPath.row];
     cell.PointsMallCollectionViewCellDelegete = self;
     // Configure the cell
     
@@ -85,6 +92,17 @@ static NSString * const reuseIdentifier = @"pointsMallCell";
 
 - (void)selectPointsMallCollectionViewCell:(PointsMallCollectionViewCell *)pointsMallCollectionViewCell
 {
+   
+    // 取出不变数组转换成可变数组 NSUserDefaults存储的默认都是不变数组
+    NSMutableArray *images = [NSMutableArray arrayWithArray:[UserInfoModel shareUserInfo].goods];
+    
+     // 添加图片
+    [images addObject:pointsMallCollectionViewCell.imageName];
+    
+    // 存储图片
+    [UserInfoModel shareUserInfo].goods = images;
+    [[UserInfoModel shareUserInfo] saveData];
+    
     UIAlertController *alerVc = [UIAlertController alertControllerWithTitle:nil message:@"兑换成功!" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         

@@ -20,4 +20,6 @@
 @interface PointsMallCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) id<PointsMallCollectionViewCellDelegete>PointsMallCollectionViewCellDelegete;
+@property (weak, nonatomic) IBOutlet UIImageView *goodsImage;
+@property (nonatomic, strong) NSString *imageName;
 @end
